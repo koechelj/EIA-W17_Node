@@ -42,7 +42,7 @@ namespace ServerTest {
         // Header: ?
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
-        // Response Body
+        // Response, die zurück geschickt wird:
         _response.write("Vielen Dank. Deine Bestelldaten:<br>");
         //        _response.write("Port: " + port + "<br>");
         //        _response.write("Method: " + _request.method + "<br>");
