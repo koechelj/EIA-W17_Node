@@ -11,8 +11,8 @@ let db;
 let students;
 if (process.env.NODE_ENV == "production") {
     //    databaseURL = "mongodb://username:password@hostname:port/database";
-    databaseURL = "mongodb://koechelj:12345@ds263367.mlab.com:29532/eia2";
-    databaseName = "eia2";
+    databaseURL = "mongodb://koechelj:12345@ds263367.mlab.com:63367/koechelj_mongodb";
+    databaseName = "koechelj_mongodb";
 }
 Mongo.MongoClient.connect(databaseURL, handleConnect);
 function handleConnect(_e, _db) {
