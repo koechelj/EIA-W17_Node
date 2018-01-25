@@ -57,10 +57,12 @@ namespace ServerTest {
 
         // Response, die vom Server zurück geschickt wird:
         _response.write("Vielen Dank. Deine Bestelldaten:<br>");
+        _response.write("Url: " + _request.url + "<br>");
        
         // Variable query vom Typ des Interfaces = ?         
         let query: AssocStringString = Url.parse(_request.url, true).query;
         
+     
         // ?
         for (let key in query)
             _response.write(key + ": " + query[key] + "<br>");
