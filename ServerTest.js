@@ -34,7 +34,7 @@ var ServerTest;
         // ?
         for (let key in query)
             _response.write(key + ": " + query[key] + "<br>");
-        // Response abschicken
+        // Response schlie�en u. abschicken
         _response.end();
     }
 })(ServerTest || (ServerTest = {}));

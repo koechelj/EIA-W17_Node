@@ -67,7 +67,7 @@ namespace ServerTest {
         for (let key in query)
             _response.write(key + ": " + query[key] + "<br>");
 
-        // Response abschicken
+        // Response schlieﬂen u. abschicken
         _response.end();
     }
 }
