@@ -1,43 +1,36 @@
+//Node: Response schreiben, die vom Server zur�ck gesendet wird, wenn eine Request eingegangen ist
 "use strict";
-// Node-Http-Modul importieren
+// Http-Modul importieren  
 const Http = require("http");
-// Node-Url-Modul importieren
+// Url-Modul  (splittet Webadresse in Einzelbestandteile = Queryparameter)
 const Url = require("url");
 var ServerTest;
 (function (ServerTest) {
-    // Port vom Process Objekt erfragen 
+    // Portvariable f�r Server, auf dem gearbeitet werden soll
     let port = process.env.PORT;
-    // Port nicht definiert -> lokale Maschine, Port selbst definieren
-    //    if (port == undefined)
-    //        port =0;
-    // Server Objekt kreieren
+    // Server erstellen
     let server = Http.createServer();
-    // Event-Handler installieren
-    server.addListener("listening", handleListen);
-    server.addListener("request", handleRequest);
-    // Auf dem Port horchen
+    // Eventlistener installieren
+    server.addListener("listening", handleListen); //wenn Server am Port lauscht, dann f�hre function aus
+    server.addListener("request", handleRequest); //wenn Request beim Server eingeht....
+    // Server lauscht am Port:
     server.listen(port);
-    // Event h�ren: 
+    // wenn Server lauscht---> Konsolenausgabe 
     function handleListen() {
         console.log("Server listening on port " + port);
     }
-    // Request Event: Verarbeiten der Request und erstellen der Response
+    //Event: Request verarbeiten und Response erstellen
     function handleRequest(_request, _response) {
-        console.log(_request);
-        // Header: Antwort kommt im HTML Format mit uft-8
+        console.log(_request); //Requestmessage auf Konsole anzeigen
+        //setze utf-8 in den Header der Response
         _response.setHeader("content-type", "text/html; charset=utf-8");
-        // Header: ?
+        // ?
         _response.setHeader("Access-Control-Allow-Origin", "*");
-        // Response, die zur�ck geschickt wird:
+        // Response, die vom Server zur�ck geschickt wird:
         _response.write("Vielen Dank. Deine Bestelldaten:<br>");
-        //        _response.write("Port: " + port + "<br>");
-        //        _response.write("Method: " + _request.method + "<br>");
-        _response.write("Url: " + _request.url + "<br>");
-        //        _response.write("Headers: " + _request.headers + "<br>");
-        // ?        
+        // Variable query vom Typ des Interfaces = ?         
         let query = Url.parse(_request.url, true).query;
         // ?
-        _response.write("<h1>" + query["Baumart"] + "</h1>");
         for (let key in query)
             _response.write(key + ": " + query[key] + "<br>");
         // Response abschicken

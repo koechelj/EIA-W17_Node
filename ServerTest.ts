@@ -1,59 +1,67 @@
-// Node-Http-Modul importieren
+
+//Node: Response schreiben, die vom Server zurück gesendet wird, wenn eine Request eingegangen ist
+
+
+// Http-Modul importieren  
 import * as Http from "http";
-// Node-Url-Modul importieren
+// Url-Modul  (splittet Webadresse in Einzelbestandteile = Queryparameter)
 import * as Url from "url";
+
+
 
 namespace ServerTest {
     
-     interface hans {
-         hansArray: string[];
-         }
     
+
     
-    // Neuer Datentyp AssocStringString: homogenes, assoziatives Array.
+    // Neuer Datentyp AssocStringString 
     interface AssocStringString {
-        [key: string]: string;
+        [key: string]: string;  //homogenes, assoziatives Array, das nur einen Datentyp speichern kann / komplettes Array ist vom Typ string
     }
 
-    // Port vom Process Objekt erfragen 
-    let port: number = process.env.PORT;
-    // Port nicht definiert -> lokale Maschine, Port selbst definieren
-    //    if (port == undefined)
-    //        port =0;
     
-    // Server Objekt kreieren
+    
+    // Portvariable für Server, auf dem gearbeitet werden soll
+    let port: number = process.env.PORT;
+   
+    
+    // Server erstellen
     let server: Http.Server = Http.createServer();
-    // Event-Handler installieren
-    server.addListener("listening", handleListen);
-    server.addListener("request", handleRequest);
-    // Auf dem Port horchen
+    
+    
+    // Eventlistener installieren
+    server.addListener("listening", handleListen);  //wenn Server am Port lauscht, dann führe function aus
+    server.addListener("request", handleRequest);  //wenn Request beim Server eingeht....
+    
+    
+    // Server lauscht am Port:
     server.listen(port);
 
-    // Event hören: 
+    
+    // wenn Server lauscht---> Konsolenausgabe 
     function handleListen(): void {
-        console.log("Server listening on port " + port);
+        console.log("Server listening on port " + port);  
     }
 
-    // Request Event: Verarbeiten der Request und erstellen der Response
+    
+    //Event: Request verarbeiten und Response erstellen
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
-        console.log(_request);
-        // Header: Antwort kommt im HTML Format mit uft-8
+        
+        console.log(_request);  //Requestmessage auf Konsole anzeigen
+        
+        //setze utf-8 in den Header der Response
         _response.setHeader("content-type", "text/html; charset=utf-8");
-        // Header: ?
+        
+        // ?
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
-        // Response, die zurück geschickt wird:
+        // Response, die vom Server zurück geschickt wird:
         _response.write("Vielen Dank. Deine Bestelldaten:<br>");
-        //        _response.write("Port: " + port + "<br>");
-        //        _response.write("Method: " + _request.method + "<br>");
-        _response.write("Url: " + _request.url + "<br>");
-        //        _response.write("Headers: " + _request.headers + "<br>");
-        // ?        
+       
+        // Variable query vom Typ des Interfaces = ?         
         let query: AssocStringString = Url.parse(_request.url, true).query;
+        
         // ?
-        
-        _response.write("<h1>" + query["Baumart"] + "</h1>");
-        
         for (let key in query)
             _response.write(key + ": " + query[key] + "<br>");
 

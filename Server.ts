@@ -30,7 +30,7 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
     var command: string = query["command"];
 
     switch (command) {
-        case "insert":
+        case "insert":  //nimmt Objekt der student Klasse entgegen
             let student: StudentData = {
                 name: query["name"],
                 firstname: query["firstname"],
@@ -39,8 +39,8 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
             Database.insert(student);
             respond(_response, "storing data");
             break;
-        case "find":
-            Database.findAll(function(json: string): void {
+        case "find":  
+            Database.findAll(function(json: string): void {  //wenn findAll fertig ist->function ausführen->alle Daten in json auslesen
                 respond(_response, json);
             });
             break;
