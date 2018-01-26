@@ -56,7 +56,7 @@ namespace ServerTest {
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
         // Response, die vom Server zurück geschickt wird:
-        _response.write("Vielen Dank. Deine Bestelldaten:<br>");
+        _response.write("Deine Daten:<br>");
         _response.write("Url: " + _request.url + "<br>");
        
         // Variable query vom Typ des Interfaces = ?         
