@@ -16,7 +16,8 @@ namespace ServerTest {
     
     // Neuer Datentyp AssocStringString 
     interface AssocStringString {
-        [key: string]: string;  //homogenes, assoziatives Array, das nur einen Datentyp speichern kann / komplettes Array ist vom Typ string
+        [key: string]: string;  //homogenes, assoziatives Array, das nur einen Datentyp speichern kann / 
+        //Schlüssel sind vom Typ string und Werte sind vom Typ string
     }
 
     
@@ -29,7 +30,7 @@ namespace ServerTest {
     let server: Http.Server = Http.createServer();
     
     
-    // Eventlistener installieren
+    // Eventlistener am ServerPort installieren 
     server.addListener("listening", handleListen);  //wenn Server am Port lauscht, dann führe function aus
     server.addListener("request", handleRequest);  //wenn Request beim Server eingeht....
     
@@ -57,7 +58,7 @@ namespace ServerTest {
 
         // Response, die vom Server zurück geschickt wird:
         _response.write("Deine Daten:<br>");
-        _response.write("Url: " + _request.url + "<br>");
+        
        
         // Variable query vom Typ des Interfaces = ?         
         let query: AssocStringString = Url.parse(_request.url, true).query;

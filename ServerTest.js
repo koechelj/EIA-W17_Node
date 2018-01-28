@@ -10,7 +10,7 @@ var ServerTest;
     let port = process.env.PORT;
     // Server erstellen
     let server = Http.createServer();
-    // Eventlistener installieren
+    // Eventlistener am ServerPort installieren 
     server.addListener("listening", handleListen); //wenn Server am Port lauscht, dann f�hre function aus
     server.addListener("request", handleRequest); //wenn Request beim Server eingeht....
     // Server lauscht am Port:
@@ -28,7 +28,6 @@ var ServerTest;
         _response.setHeader("Access-Control-Allow-Origin", "*");
         // Response, die vom Server zur�ck geschickt wird:
         _response.write("Deine Daten:<br>");
-        _response.write("Url: " + _request.url + "<br>");
         // Variable query vom Typ des Interfaces = ?         
         let query = Url.parse(_request.url, true).query;
         // ?
